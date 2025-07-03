@@ -4,6 +4,7 @@ import { pages } from '@/lib/pages';
 
 export default function sitemap() {
   const siteUrl = 'https://www.hildashem.se'; // Replace with your actual domain
+  const currentDate = new Date().toISOString();
 
   // Generate URLs for all blog posts
   const postUrls = posts.map((post) => {
@@ -14,7 +15,7 @@ export default function sitemap() {
       
     return {
       url: `${siteUrl}${postPath}`,
-      lastModified: new Date(post.date).toISOString(),
+      lastModified: new Date(post.date).toISOString(), // Now safe due to standardized dates
       changeFrequency: 'monthly',
       priority: 0.8,
     };
@@ -24,7 +25,7 @@ export default function sitemap() {
   const pageUrls = pages.map((page) => {
     return {
       url: `${siteUrl}/p/${page.slug}.html`,
-      lastModified: new Date().toISOString(), // Use a recent date for static pages
+      lastModified: currentDate,
       changeFrequency: 'yearly',
       priority: 0.5,
     };
@@ -34,13 +35,13 @@ export default function sitemap() {
   const staticRoutes = [
     {
       url: siteUrl,
-      lastModified: new Date().toISOString(),
+      lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 1.0,
     },
     {
       url: `${siteUrl}/category/pysseltips`,
-      lastModified: new Date().toISOString(),
+      lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.7,
     },
